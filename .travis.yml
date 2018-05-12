@@ -1,41 +1,75 @@
-linux: &linux
-   os: linux
-   sudo: required
-   language: python
-   python: "3.6"
-   services:
-     - docker
-osx: &osx
-   os: osx
-   language: generic
+env:
+        global:
+                secure: K0+JMGFFr4jIqB2Whtj2XP5HHcyjnLaobAYZ5xVgpUvVQqPUAwIYIGz1keQJJy6bjsS2wZaDzEhb4mGkaSXB79ZoBUHglT4aljKntDr29RLnyrDvRyERG5K+hxp31aVoX+Og3cYlnykXK2U2qIrhQXhKNzAXsOWMXcAl3DS0G3teKcTvDsKI3BC5ggBhElHIevUVWYUdx06Jb7kMhT8dBc+C0CACX2NTjO1v4rbJWh9K9JG4EQJBctyF0I0lUEgbZkx2frH/h+6VgMC/GO7uppAcR1CDFup+RddbM2VPTrfsVCvQoZ08doXEO4TiP8BkpfdxaQFpZTQUGzrY5LSbgPGv/Ukv0r/CdfjFslGoxfKY01uZroa9I5dlDwCcO4byC/ZgPbbPzv+W39Om4TAxTbFCax/n5YeSWdItNuAlDnDBuERvF/zFaw6JhhxAbh4dFCozD+02/NmcOAAcPhbCRj8d3XbQ9O0BYnSH/tl9WN48YOjMsclLCgdHmHta+SvPgkClylJJAGGTx8B/PFSjx79SQjDUlVIQ2HSn2+5jYbbTgMgInnQ0xsOBtrmutVv5fxIHuCOq9HQ7gSSWVNo6+S+EN9/PvsH4beoWNjx8B/JRcxtRQp6YyXhCg/QEnwAFnIX1w2WqSiUNW7zoxppfWmN00IDAxggQWlLWIerIEwU=
+                - CONAN_LOGIN_USERNAME="saprykin"
+
+linux:
+        os: linux
+        sudo: required
+        language: python
+        python: '3.6'
+        services: &1
+        - docker
+
+osx:
+        os: osx
+        language: generic
+
 matrix:
-   include:
-      - <<: *linux
-        env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=lasote/conangcc49
-      - <<: *linux
-        env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5
-      - <<: *linux
-        env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6
-      - <<: *linux
-        env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7
-      - <<: *linux
-        env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
-      - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
-      - <<: *osx
-        osx_image: xcode7.3
-        env: CONAN_APPLE_CLANG_VERSIONS=7.3
-      - <<: *osx
-        osx_image: xcode8.3
-        env: CONAN_APPLE_CLANG_VERSIONS=8.1
-      - <<: *osx
-        osx_image: xcode9
-        env: CONAN_APPLE_CLANG_VERSIONS=9.0
+        include:
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=lasote/conangcc49
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=lasote/conangcc5
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=lasote/conangcc6
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=lasote/conangcc7
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
+        - os: linux
+                sudo: required
+                language: python
+                python: '3.6'
+                services: *1
+                env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40
+        - os: osx
+                language: generic
+                osx_image: xcode7.3
+                env: CONAN_APPLE_CLANG_VERSIONS=7.3
+        - os: osx
+                language: generic
+                osx_image: xcode8.3
+                env: CONAN_APPLE_CLANG_VERSIONS=8.1
+        - os: osx
+                language: generic
+                osx_image: xcode9
+                env: CONAN_APPLE_CLANG_VERSIONS=9.0
 
 install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+        - chmod +x .travis/install.sh
+        - "./.travis/install.sh"
 
 script:
-  - chmod +x .travis/run.sh
-  - ./.travis/run.sh
+        - chmod +x .travis/run.sh
+        - "./.travis/run.sh"
