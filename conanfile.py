@@ -8,7 +8,7 @@ import os
 class PlibsysConan(ConanFile):
     name = "plibsys"
     version = "0.0.3"
-    url = "https://github.com/bincrafters/conan-plibsys"
+    url = "https://github.com/saprykin/conan-plibsys"
     homepage = "https://github.com/saprykin/plibsys"
     description = "Highly portable C system library"
     license = "LGPL-2.1"
