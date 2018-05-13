@@ -2,7 +2,7 @@
 
 int main()
 {
-	PSocketAddress* addr;
-	PSocket* sock;
-    return 0;
+	p_libsys_init ();
+	p_libsys_shutdown ();
+	return 0;
 }
