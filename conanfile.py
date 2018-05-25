@@ -29,7 +29,7 @@ class PlibsysConan(ConanFile):
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["PLIBSYS_TESTS"] = False 
-        cmake.definitions["PLIBSYS_BUILD_STATIC"] = not self.options.shared 
+        cmake.definitions["PLIBSYS_BUILD_STATIC"] = not self.options.shared
         cmake.definitions["PLIBSYS_COVERAGE"] = False 
         cmake.configure()
         return cmake
@@ -44,6 +44,10 @@ class PlibsysConan(ConanFile):
         self.copy(pattern="COPYING", dst="licenses", src=self.source_subfolder)
 
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self)
+        if self.options.shared:
+            self.cpp_info.libs = ['plibsys']
+        else:
+            self.cpp_info.libs = ['plibsysstatic']
+
         self.cpp_info.includedirs.append(os.path.join('include', 'plibsys'))
         
