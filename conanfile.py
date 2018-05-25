@@ -53,6 +53,8 @@ class PlibsysConan(ConanFile):
             self.cpp_info.libs.append("pthread")
             self.cpp_info.libs.append("rt")
             self.cpp_info.libs.append("dl")
+        elif self.settings.os == "Windows":
+            self.cpp_info.libs.append("ws2_32")
 
         self.cpp_info.includedirs.append(os.path.join('include', 'plibsys'))
         
