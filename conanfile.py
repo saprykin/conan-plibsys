@@ -49,5 +49,10 @@ class PlibsysConan(ConanFile):
         else:
             self.cpp_info.libs = ['plibsysstatic']
 
+        if self.settings.os == "Linux":
+            self.cpp_info.libs.append("pthread")
+            self.cpp_info.libs.append("rt")
+            self.cpp_info.libs.append("dl")
+
         self.cpp_info.includedirs.append(os.path.join('include', 'plibsys'))
         
