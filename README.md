@@ -20,7 +20,7 @@ If you wish to report an issue or make a request for a Bincrafters package, plea
 
 ## General Information
 
-This GIT repository is managed by the Bincrafters team and holds files related to Conan.io.  For detailed information about Bincrafters and Conan.io, please visit the following resources:
+This GIT repository holds files related to Conan.io.  For detailed information about Bincrafters and Conan.io, please visit the following resources:
 
 [Bincrafters Wiki - Common README](https://github.com/bincrafters/community/wiki/Common-README.md)
 
