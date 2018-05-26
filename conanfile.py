@@ -39,9 +39,31 @@ class PlibsysConan(ConanFile):
         cmake.build()
 
     def package(self):
-        cmake = self._configure_cmake()
-        cmake.install()
+        # Copy license
         self.copy(pattern="COPYING", dst="licenses", src=self.source_subfolder)
+
+        # Copy libraries
+        if self.settings.os == "Windows":
+            if self.options.shared:
+                self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
+                self.copy(pattern="*plibsys.lib", dst="lib", src=".", keep_path=False)
+                self.copy(pattern="*plibsys.lib", dst="lib", src=".", keep_path=False)
+                self.copy(pattern="*plibsys.dll.a", dst="lib", src=".", keep_path=False)
+            else:
+                self.copy(pattern="libplibsysstatic.a", dst="lib", src=".", keep_path=False)
+                self.copy(pattern="plibsysstatic.lib", dst="lib", src=".", keep_path=False)
+        else:
+            if self.options.shared:
+                if self.settings.os == "Macos":
+                    self.copy(pattern="*.dylib", dst="lib", src=".", keep_path=False)
+                else:
+                    self.copy(pattern="*.so*", dst="lib", src=".", keep_path=False)
+            else:
+                self.copy(pattern="*.a", dst="lib", src=".", keep_path=False)
+
+        # Copy headers
+        self.copy(pattern="*.h", dst="include", src=self.source_subfolder, keep_path=False)
+        self.copy(pattern="*.h", dst="include", src=".", keep_path=False)
 
     def package_info(self):
         if self.options.shared:
@@ -56,5 +78,5 @@ class PlibsysConan(ConanFile):
         elif self.settings.os == "Windows":
             self.cpp_info.libs.append("ws2_32")
 
-        self.cpp_info.includedirs.append(os.path.join('include', 'plibsys'))
-        
+        self.cpp_info.includedirs.append("include")
+
