@@ -7,11 +7,11 @@ import os
 
 class PlibsysConan(ConanFile):
     name = "plibsys"
-    version = "0.0.3"
+    version = "0.0.4"
     url = "https://github.com/saprykin/conan-plibsys"
     homepage = "https://github.com/saprykin/plibsys"
     description = "Highly portable C system library"
-    license = "LGPL-2.1"
+    license = "MIT"
     exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
