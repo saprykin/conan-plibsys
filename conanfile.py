@@ -45,13 +45,19 @@ class PlibsysConan(ConanFile):
         # Copy libraries
         if self.settings.os == "Windows":
             if self.options.shared:
-                self.copy(pattern="*.dll", dst="bin", src=".", keep_path=False)
-                self.copy(pattern="*plibsys.lib", dst="lib", src=".", keep_path=False)
+                # Visual Studio
+                self.copy(pattern="*.dll", dst="bin", src="bin", keep_path=False)
+                self.copy(pattern="*plibsys.lib", dst="lib", src="lib", keep_path=False)
+
+                # MinGW
                 self.copy(pattern="*plibsys.lib", dst="lib", src=".", keep_path=False)
                 self.copy(pattern="*plibsys.dll.a", dst="lib", src=".", keep_path=False)
             else:
+                # Visual Studio
                 self.copy(pattern="libplibsysstatic.a", dst="lib", src=".", keep_path=False)
-                self.copy(pattern="plibsysstatic.lib", dst="lib", src=".", keep_path=False)
+
+                # MinGW
+                self.copy(pattern="plibsysstatic.lib", dst="lib", src="lib", keep_path=False)
         else:
             if self.options.shared:
                 if self.settings.os == "Macos":
