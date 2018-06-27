@@ -26,6 +26,9 @@ class PlibsysConan(ConanFile):
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self.source_subfolder)
 
+    def configure(self):
+        del self.settings.compiler.libcxx
+
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["PLIBSYS_TESTS"] = False 
